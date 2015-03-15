@@ -71,12 +71,12 @@ import com.oltpbenchmark.util.SQLUtil;
 //need to know current dbType 
 import com.oltpbenchmark.types.DatabaseType;
 
-public class TPCCLoader extends Loader{
+public class TPCCLoader extends Loader {
     private static final Logger LOG = Logger.getLogger(TPCCLoader.class);
 
 	public TPCCLoader(TPCCBenchmark benchmark, Connection c) {
 		super(benchmark, c);
-        numWarehouses = (int)Math.round(configWhseCount * this.scaleFactor);
+        numWarehouses = (int) Math.round(configWhseCount * this.scaleFactor);
         if (numWarehouses == 0) {
             //where would be fun in that?
             numWarehouses = 1;
@@ -102,8 +102,9 @@ public class TPCCLoader extends Loader{
 	private static final int FIRST_UNPROCESSED_O_ID = 2101;
 	
 	private PreparedStatement getInsertStatement(String tableName) throws SQLException {
-        Table catalog_tbl = this.getTableCatalog(tableName);
-        assert(catalog_tbl != null);
+		Table catalog_tbl = this.getTableCatalog(tableName);
+		
+		assert(catalog_tbl != null);
 
 				//woonhak, if current dbType is postgres then make insertSQL without escaped character.
 				String sql = null;
@@ -165,7 +166,7 @@ public class TPCCLoader extends Loader{
 		
 
 		try {
-		    PreparedStatement itemPrepStmt = getInsertStatement(TPCCConstants.TABLENAME_ITEM);
+			PreparedStatement itemPrepStmt = getInsertStatement(TPCCConstants.TABLENAME_ITEM);
 
 			now = new java.util.Date();
 			t = itemKount;

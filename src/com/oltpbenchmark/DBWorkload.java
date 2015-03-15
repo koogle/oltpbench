@@ -211,6 +211,9 @@ public class DBWorkload {
             wrkld.setDBDriver(xmlConfig.getString("driver"));
             wrkld.setDBConnection(xmlConfig.getString("DBUrl"));
             wrkld.setDBName(xmlConfig.getString("DBName"));
+            
+            LOG.info("DBName is " + xmlConfig.getString("DBName"));
+
             wrkld.setDBUsername(xmlConfig.getString("username"));
             wrkld.setDBPassword(xmlConfig.getString("password"));
             int terminals = xmlConfig.getInt("terminals[not(@bench)]", 0);

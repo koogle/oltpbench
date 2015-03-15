@@ -21,33 +21,33 @@ public class NewOrder extends TPCCProcedure {
 
     public final SQLStmt stmtGetCustWhseSQL = new SQLStmt(
     		"SELECT C_DISCOUNT, C_LAST, C_CREDIT, W_TAX"
-			+ "  FROM " + TPCCConstants.TABLENAME_CUSTOMER + ", " + TPCCConstants.TABLENAME_WAREHOUSE
+			+ "  FROM TPCC." + TPCCConstants.TABLENAME_CUSTOMER + ", TPCC." + TPCCConstants.TABLENAME_WAREHOUSE
 			+ " WHERE W_ID = ? AND C_W_ID = ?"
 			+ " AND C_D_ID = ? AND C_ID = ?");
 
     public final SQLStmt stmtGetDistSQL = new SQLStmt(
-    		"SELECT D_NEXT_O_ID, D_TAX FROM " + TPCCConstants.TABLENAME_DISTRICT
+    		"SELECT D_NEXT_O_ID, D_TAX FROM TPCC." + TPCCConstants.TABLENAME_DISTRICT
 					+ " WHERE D_W_ID = ? AND D_ID = ? FOR UPDATE"
     				);
 
-	public final SQLStmt  stmtInsertNewOrderSQL = new SQLStmt("INSERT INTO "+ TPCCConstants.TABLENAME_NEWORDER + " (NO_O_ID, NO_D_ID, NO_W_ID) VALUES ( ?, ?, ?)");
+	public final SQLStmt  stmtInsertNewOrderSQL = new SQLStmt("INSERT INTO TPCC."+ TPCCConstants.TABLENAME_NEWORDER + " (NO_O_ID, NO_D_ID, NO_W_ID) VALUES ( ?, ?, ?)");
 
-	public final SQLStmt  stmtUpdateDistSQL = new SQLStmt("UPDATE " + TPCCConstants.TABLENAME_DISTRICT + " SET D_NEXT_O_ID = D_NEXT_O_ID + 1 WHERE D_W_ID = ? AND D_ID = ?");
+	public final SQLStmt  stmtUpdateDistSQL = new SQLStmt("UPDATE TPCC." + TPCCConstants.TABLENAME_DISTRICT + " SET D_NEXT_O_ID = D_NEXT_O_ID + 1 WHERE D_W_ID = ? AND D_ID = ?");
 
-	public final SQLStmt  stmtInsertOOrderSQL = new SQLStmt("INSERT INTO " + TPCCConstants.TABLENAME_OPENORDER
+	public final SQLStmt  stmtInsertOOrderSQL = new SQLStmt("INSERT INTO TPCC." + TPCCConstants.TABLENAME_OPENORDER
 			+ " (O_ID, O_D_ID, O_W_ID, O_C_ID, O_ENTRY_D, O_OL_CNT, O_ALL_LOCAL)"
 			+ " VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-	public final SQLStmt  stmtGetItemSQL = new SQLStmt("SELECT I_PRICE, I_NAME , I_DATA FROM " + TPCCConstants.TABLENAME_ITEM + " WHERE I_ID = ?");
+	public final SQLStmt  stmtGetItemSQL = new SQLStmt("SELECT I_PRICE, I_NAME , I_DATA FROM TPCC." + TPCCConstants.TABLENAME_ITEM + " WHERE I_ID = ?");
 
 	public final SQLStmt  stmtGetStockSQL = new SQLStmt("SELECT S_QUANTITY, S_DATA, S_DIST_01, S_DIST_02, S_DIST_03, S_DIST_04, S_DIST_05, "
 			+ "       S_DIST_06, S_DIST_07, S_DIST_08, S_DIST_09, S_DIST_10"
-			+ " FROM " + TPCCConstants.TABLENAME_STOCK + " WHERE S_I_ID = ? AND S_W_ID = ? FOR UPDATE");
+			+ " FROM TPCC." + TPCCConstants.TABLENAME_STOCK + " WHERE S_I_ID = ? AND S_W_ID = ? FOR UPDATE");
 
-	public final SQLStmt  stmtUpdateStockSQL = new SQLStmt("UPDATE " + TPCCConstants.TABLENAME_STOCK + " SET S_QUANTITY = ? , S_YTD = S_YTD + ?, S_ORDER_CNT = S_ORDER_CNT + 1, S_REMOTE_CNT = S_REMOTE_CNT + ? "
+	public final SQLStmt  stmtUpdateStockSQL = new SQLStmt("UPDATE TPCC." + TPCCConstants.TABLENAME_STOCK + " SET S_QUANTITY = ? , S_YTD = S_YTD + ?, S_ORDER_CNT = S_ORDER_CNT + 1, S_REMOTE_CNT = S_REMOTE_CNT + ? "
 			+ " WHERE S_I_ID = ? AND S_W_ID = ?");
 
-	public final SQLStmt  stmtInsertOrderLineSQL = new SQLStmt("INSERT INTO " + TPCCConstants.TABLENAME_ORDERLINE + " (OL_O_ID, OL_D_ID, OL_W_ID, OL_NUMBER, OL_I_ID, OL_SUPPLY_W_ID,"
+	public final SQLStmt  stmtInsertOrderLineSQL = new SQLStmt("INSERT INTO TPCC." + TPCCConstants.TABLENAME_ORDERLINE + " (OL_O_ID, OL_D_ID, OL_W_ID, OL_NUMBER, OL_I_ID, OL_SUPPLY_W_ID,"
 			+ "  OL_QUANTITY, OL_AMOUNT, OL_DIST_INFO) VALUES (?,?,?,?,?,?,?,?,?)");
 
 

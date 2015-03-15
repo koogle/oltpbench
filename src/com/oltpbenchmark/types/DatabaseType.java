@@ -19,7 +19,8 @@ public enum DatabaseType {
     HSQLDB,
     H2,
     MONETDB,
-    NUODB
+    NUODB,
+    HANADB
     ;
     
     public static final DatabaseType TEST_TYPE = DatabaseType.HSQLDB; 

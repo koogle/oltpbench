@@ -63,6 +63,7 @@ public class ResultUploader {
         username = expConf.getString("username");
         password = expConf.getString("password");
         benchType = argsLine.getOptionValue("b");
+        System.out.println("Windows Size is " + argsLine.getOptionValue("s"));
         windowSize = Integer.parseInt(argsLine.getOptionValue("s"));
         uploadCode = expConf.getString("uploadCode");
         uploadUrl = expConf.getString("uploadUrl");

@@ -93,6 +93,8 @@ public class ScriptRunner {
 	 */
 	public void runScript(URL resource) throws IOException, SQLException {
 		Reader reader = new InputStreamReader(resource.openStream());
+
+		System.out.println(resource);
 		try {
 			boolean originalAutoCommit = connection.getAutoCommit();
 			try {

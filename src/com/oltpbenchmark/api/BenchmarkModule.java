@@ -26,6 +26,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -106,6 +107,10 @@ public abstract class BenchmarkModule {
      * @throws SQLException
      */
     protected final Connection makeConnection() throws SQLException {
+        LOG.info("DBConnection:\t" + workConf.getDBConnection());
+        LOG.info("Username:\t" + workConf.getDBUsername());
+        LOG.info("Password:\t" + workConf.getDBPassword());
+        
         Connection conn = DriverManager.getConnection(workConf.getDBConnection(),
                 workConf.getDBUsername(),
                 workConf.getDBPassword());
@@ -235,6 +240,7 @@ public abstract class BenchmarkModule {
     public final void createDatabase(DatabaseType dbType, Connection conn) throws SQLException {
         try {
             URL ddl = this.getDatabaseDDL(dbType);
+            LOG.warn(ddl);
             assert(ddl != null) : "Failed to get DDL for " + this;
             ScriptRunner runner = new ScriptRunner(conn, true, true);
             if (LOG.isDebugEnabled()) LOG.debug("Executing script '" + ddl + "'");
@@ -281,7 +287,23 @@ public abstract class BenchmarkModule {
     protected final void loadDatabase(Connection conn) {
         try {
             Loader loader = this.makeLoaderImpl(conn);
+
             if (loader != null) {
+                
+                /* SET SCHEMA for hana */
+
+                if(this.workConf.getDBType() == DatabaseType.HANADB) {
+                    Statement stmt = conn.createStatement();        
+                    try {
+                        String setschemaString = "SET SCHEMA " + this.workConf.getDBName();
+                        System.out.println(setschemaString);
+                        stmt.execute(setschemaString);
+                    //    conn.commit();
+                    } catch (SQLException ex) {
+                        LOG.info(ex.getMessage());
+                        throw new RuntimeException(String.format("Error in setting schema for %s", this.workConf.getDBName()), ex);
+                    }
+                }
                 conn.setAutoCommit(false);
                 loader.load();
                 conn.commit();
