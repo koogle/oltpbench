@@ -17,4 +17,4 @@ output.res
 *~
 
 # maven output
-target
+targetconfig.xml
