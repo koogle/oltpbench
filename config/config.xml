@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<parameters>
+    <dbtype>HANADB</dbtype>
+    <driver>com.sap.db.jdbc.Driver</driver>
+    <DBUrl>jdbc:sap://192.168.30.38:33115</DBUrl>
+    <DBName>TPCC</DBName>
+    <username>YYYYYY</username>
+    <password>XXXXXXXXXX</password>
+    <isolation>TRANSACTION_SERIALIZABLE</isolation>
+    
+    <!-- Scale factor is the number of warehouses in TPCC -->
+    <scalefactor>32</scalefactor>
+    
+    <!-- The workload -->
+    <terminals>200</terminals>
+    <works>
+        <work>
+          <time>300</time>
+          <rate>10000</rate>
+          <weights>45,43,4,4,4</weights>
+        </work>
+	</works>
+	
+	<!-- TPCC specific -->  
+   	<transactiontypes>
+   	 	<transactiontype>
+    			<name>NewOrder</name>
+    		</transactiontype>
+    		<transactiontype>
+    			<name>Payment</name>
+    		</transactiontype>
+    		<transactiontype>
+    			<name>OrderStatus</name>
+	    	</transactiontype>
+    		<transactiontype>
+    			<name>Delivery</name>
+    		</transactiontype>
+    		<transactiontype>
+    			<name>StockLevel</name>
+    		</transactiontype>
+	</transactiontypes>
+</parameters>
